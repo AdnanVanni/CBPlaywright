@@ -31,8 +31,9 @@ test('CloudBees website verification and documentation navigation', async ({ pag
 
     await page1.getByRole('textbox', { name: 'Search all CloudBees Resources' }).click();
     await page1.getByRole('textbox', { name: 'Search', exact: true }).fill('installation');
-    await page1.getByRole('textbox', { name: 'Search', exact: true }).press('Enter');
-    await page1.getByRole('button', { name: 'Product' }).click();
-    await page1.getByText('All Products').click();
+    await page1.waitForTimeout(10000)
+
+    const links = await page1.locator('.page-link').all();
+    expect(links.length).toBe(3);
   });
 });
